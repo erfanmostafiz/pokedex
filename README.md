@@ -9,4 +9,6 @@
 - Responsive and user-friendly design
 - Built with React, JavaScript, and the [Pokémon API](https://pokeapi.co/)
 
-🚀 Catch 'em all now! 🔗 [Live Demo (####)]
+The web app is live to be used worldwide using this [link](https://pokedexbyerfan.netlify.app/).
+
+🚀 Catch 'em all now! 
