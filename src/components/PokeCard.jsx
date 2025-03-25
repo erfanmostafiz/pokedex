@@ -182,7 +182,7 @@ export function PokeCard(props) {
                     );
                 })}
             </div>
-            <h3>Stats</h3>
+            <h2>Stats</h2>
             <div className="stats-card">
                 {stats.map((statObj, statIndex) => {
                     const { stat, base_stat } = statObj;
@@ -194,7 +194,14 @@ export function PokeCard(props) {
                     );
                 })}
             </div>
-            <h3>Moves</h3>
+            <span>
+                <h2>Moves</h2>
+            </span>
+            <span>
+                <p>
+                    <i>(Press any move button below to learn more)</i>
+                </p>
+            </span>
             <div className="pokemon-move-grid">
                 {moves.map((moveObj, moveIndex) => {
                     return (
