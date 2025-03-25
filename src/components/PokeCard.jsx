@@ -194,14 +194,9 @@ export function PokeCard(props) {
                     );
                 })}
             </div>
-            <span>
-                <h3>Moves</h3>
-            </span>
-            <span>
-                <p>
-                    <i>Press any move button below to learn more</i>
-                </p>
-            </span>
+
+            <h3>Moves</h3>
+
             <div className="pokemon-move-grid">
                 {moves.map((moveObj, moveIndex) => {
                     return (
