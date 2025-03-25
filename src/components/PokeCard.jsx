@@ -182,7 +182,7 @@ export function PokeCard(props) {
                     );
                 })}
             </div>
-            <h2>Stats</h2>
+            <h3>Stats</h3>
             <div className="stats-card">
                 {stats.map((statObj, statIndex) => {
                     const { stat, base_stat } = statObj;
@@ -195,7 +195,7 @@ export function PokeCard(props) {
                 })}
             </div>
             <span>
-                <h2>Moves</h2>
+                <h3>Moves</h3>
             </span>
             <span>
                 <p>
