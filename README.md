@@ -3,7 +3,7 @@
 
 ### LIVE LINK : https://pokedexbyerfan.netlify.app/
 
- A sleek and interactive Pokédex web app that lets you explore detailed information about your favorite Pokémon! Search, filter, and view Pokémon stats, abilities, and types for the first 150 Pokémons.
+ A sleek and interactive Pokédex web app that lets you explore detailed information about your favorite Pokémon! Search, filter, and view Pokémon stats, moves, abilities, and types for the first 151 Pokémons.
 
 ✨ Features:
 - Browse and search for any Pokémon
@@ -13,4 +13,4 @@
 
 The web app is live to be used worldwide using this [link](https://pokedexbyerfan.netlify.app/).
 
-🚀 Catch 'em all now! 
+#### Catch 'em all now! 
