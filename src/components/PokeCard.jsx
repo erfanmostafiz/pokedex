@@ -199,7 +199,7 @@ export function PokeCard(props) {
             </span>
             <span>
                 <p>
-                    <i>(Press any move button below to learn more)</i>
+                    <i>Press any move button below to learn more</i>
                 </p>
             </span>
             <div className="pokemon-move-grid">
