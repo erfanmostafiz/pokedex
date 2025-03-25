@@ -8,6 +8,7 @@ export function PokeCard(props) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [skill, setSkill] = useState(null);
+    const [loadingSkill, setLoadingSkill] = useState(false);
 
     // destructure info out of data object, even if it is null data type
     const { name, height, abilities, stats, types, moves, sprites } =
@@ -28,6 +29,50 @@ export function PokeCard(props) {
         return true;
     });
 
+    async function fetchMoveData(move, moveUrl) {
+        // dont fetch data if any of the following is true:
+        if (loadingSkill || !localStorage || !moveUrl) {
+            return;
+        }
+
+        // check cache for move
+        let cache = {};
+        if (localStorage.getItem("pokemon-moves")) {
+            cache = JSON.parse(localStorage.getItem("pokemon-moves"));
+        }
+
+        if (move in cache) {
+            setSkill(cache[move]);
+            console.log("Found move in cache");
+            return;
+        }
+
+        // if move not in cache
+        try {
+            setLoadingSkill(true);
+            const res = await fetch(moveUrl);
+            const moveData = await res.json();
+            console.log("Fetched Move from API", moveData);
+            const description = moveData?.flavor_text_entries.filter((val) => {
+                return (val.version_group.name = "firred-leafgreen");
+            })[0]?.flavor_text;
+
+            const skillData = {
+                name: move,
+                description,
+            };
+
+            setSkill(skillData);
+            cache[move] = skillData;
+            localStorage.setItem("pokemon-moves", JSON.stringify(cache));
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoadingSkill(false);
+        }
+    }
+
+    // To change selected Pokemon
     useEffect(() => {
         // if loading, exit logic
         if (loading || !localStorage) {
@@ -86,16 +131,26 @@ export function PokeCard(props) {
 
     return (
         <div className="poke-card">
-            <Modal handleCloseModal={() => {}}>
-                <div>
-                    <h6>Name</h6>
-                    <h2></h2>
-                </div>
-                <div>
-                    <h6>Description</h6>
-                    <p>desfwef</p>
-                </div>
-            </Modal>
+            {/* Conditional Formatting: */}
+            {/* if skill is true, only then should you render */}
+            {skill && (
+                <Modal
+                    handleCloseModal={() => {
+                        setSkill(null);
+                    }}
+                >
+                    <div>
+                        <h6>Name</h6>
+                        <h2 className="skill-name">
+                            {skill.name.replaceAll("-", " ")}
+                        </h2>
+                    </div>
+                    <div>
+                        <h6>Description</h6>
+                        <p>{skill.description}</p>
+                    </div>
+                </Modal>
+            )}
 
             <div>
                 <h4>#{getFullPokedexNumber(selectedPokemon)}</h4>
@@ -147,7 +202,12 @@ export function PokeCard(props) {
                             // className="button-card pokemon-move"
                             className="pokemon-move"
                             key={moveIndex}
-                            onClick={() => {}}
+                            onClick={() => {
+                                fetchMoveData(
+                                    moveObj?.move?.name,
+                                    moveObj?.move?.url
+                                );
+                            }}
                         >
                             <p>{moveObj?.move?.name.replaceAll("-", " ")}</p>
                         </button>
